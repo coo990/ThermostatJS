@@ -54,4 +54,21 @@ describe('Thermostat', () => {
     });
   });
 
+  describe('when power saving mode is off', () => {
+    it('has a maximum temperature of 32 degrees', () => {
+      thermostat.switchPowerSavingModeOff();
+      for (let i = 0; i < 13; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(32);
+    });
+  });
+
+  it('can be reset to the default temperature', () => {
+    for(let i = 0; i < 6; i++) {
+      thermostat.up();
+    }
+    thermostat.resetTemperature();
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
+  });
 });

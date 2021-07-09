@@ -14,46 +14,46 @@ class Thermostat{
   getCurrentTemperature() {
     return this.temperature;
   }
- up() {
-   if (this.isMaximumTemperature()) {
-     return;
+  up() {
+    if (this.isMaximumTemperature()) {
+      return;
+    }
+    this.temperature += 1;
+  }
+  down() {
+    if (this.isMinimumTemperature()) {
+      return;
+    }
+    this.temperature -= 1
+  }
+  isMinimumTemperature() {
+    return this.temperature === this.MINIMUM_TEMPERATURE;
+  }
+  isMaximumTemperature() {
+   if (this.isPowerSavingModeOn() === false) {
+     return this.temperature === this.MAX_LIMIT_PSM_OFF;
    }
-   this.temperature += 1;
- }
- down() {
-   if (this.isMinimumTemperature()) {
-     return;
+   return this.temperature === this.MAX_LIMIT_PSM_ON;
+  } 
+   isPowerSavingModeOn() {
+    return this.powerSavingMode;
    }
-   this.temperature -= 1
- }
- isMinimumTemperature() {
-   return this.temperature === this.MINIMUM_TEMPERATURE;
- }
- isMaximumTemperature() {
-  if (this.isPowerSavingModeOn() === false) {
-    return this.temperature === this.MAX_LIMIT_PSM_OFF;
+   switchPowerSavingModeOff() {
+    this.powerSavingMode = false;
+   }
+   switchPowerSavingModeOn() {
+    this.powerSavingMode = true;
+   }
+   resetTemperature() {
+    this.temperature = this.DEFAULT_TEMPERATUERE;
+   }
+   energyUsage() {
+    if (this.temperature < this.MEDIUM_ENERGY_USAGE_LIMIT) {
+      return 'low-usage';
+    }
+    if (this.temperature <= this.HIGH_ENERGY_USAGE_LIMIT) {
+      return 'medium-usage';
+    }
+    return 'high-usage';
   }
-  return this.temperature === this.MAX_LIMIT_PSM_ON;
-}
- isPowerSavingModeOn() {
-   return this.powerSavingMode;
- }
- switchPowerSavingModeOff() {
-   this.powerSavingMode = false;
- }
- switchPowerSavingModeOn() {
-   this.powerSavingMode = true;
- }
- resetTemperature() {
-   this.temperature = this.DEFAULT_TEMPERATUERE;
- }
- energyUsage() {
-  if (this.temperature < this.MEDIUM_ENERGY_USAGE_LIMIT) {
-    return 'low-usage';
-  }
-  if (this.temperature <= this.HIGH_ENERGY_USAGE_LIMIT) {
-    return 'medium-usage';
-  }
-  return 'high-usage';
-}
 };
